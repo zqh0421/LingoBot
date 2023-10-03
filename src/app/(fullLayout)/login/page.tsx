@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {MouseEvent} from "react";
 import Image from "next/image";
 
 import ChatBubble from "@/components/ui/chatbubble";
@@ -11,7 +11,7 @@ function Login() {
   const [email, setEmail] = React.useState("");
   const [pwd, setPwd] = React.useState("");
 
-  const login = (e: Event) => {
+  const login = (e: MouseEvent) => {
     console.log(email, pwd);
   };
   return (
@@ -56,7 +56,7 @@ function Login() {
             }}
           />
         </div>
-        <ButtonLink onClick={(e) => login(e)} className="w-4/5 mt-6">
+        <ButtonLink onClick={(e: MouseEvent) => login(e)} className="w-4/5 mt-6">
           LOG IN
         </ButtonLink>
       </Wrapper>
