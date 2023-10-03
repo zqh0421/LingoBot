@@ -21,3 +21,16 @@ body {
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
+
+@layer base {
+  .light {
+    --global-bg: theme("colors.white");
+    --global-bg-invert: #111827;
+    --badges-purple-border: rgba(126, 34, 206, 0.1);
+  }
+  .dark {
+    --global-bg: #111827;
+    --global-bg-invert: theme("colors.white");
+    --badges-purple-border: rgba(192, 132, 250, 0.3);
+  }
+}

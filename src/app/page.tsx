@@ -1,7 +1,19 @@
-import Image from "next/image";
+"use client";
 import React from "react";
+import Image from "next/image";
+import {useTheme} from "next-themes";
+import {useRouter} from "next-nprogress-bar";
+
+import {useAppSelector, useAppDispatch} from "@/store/hooks";
+import {setGlobalData} from "@/store/modules/common";
 
 function Home() {
+  const {systemTheme, theme, setTheme} = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+  const dispatch = useAppDispatch();
+  const globalData = useAppSelector((state) => state.common.globalData);
+  const router = useRouter();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -9,6 +21,39 @@ function Home() {
           Get started by editing&nbsp;
           <code className="font-mono font-bold">src/app/page.tsx</code>
         </p>
+        {currentTheme === "dark" ? (
+          <div
+            className="cursor-pointer text-yellow-400"
+            onClick={() => {
+              setTheme("light");
+            }}
+          >
+            set light
+          </div>
+        ) : (
+          <div
+            className="cursor-pointer text-slate-700"
+            onClick={() => {
+              setTheme("dark");
+            }}
+          >
+            set dark
+          </div>
+        )}
+        <div
+          onClick={() => {
+            dispatch(setGlobalData({role: "admin"}));
+          }}
+        >
+          click change role: {globalData.role}
+        </div>
+        <div
+          onClick={() => {
+            router.push("/test");
+          }}
+        >
+          click to testPage
+        </div>
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
             className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
