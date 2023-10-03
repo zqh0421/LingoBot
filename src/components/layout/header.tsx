@@ -1,7 +1,7 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
-import {useRouter} from "next-nprogress-bar";
 import {useTheme} from "next-themes";
 
 import {useAppSelector, useAppDispatch} from "@/store/hooks";
@@ -13,7 +13,6 @@ const Header = () => {
   const [currentTheme, setCurrentTheme] = React.useState(theme === "system" ? systemTheme : theme); // default to dark
   const dispatch = useAppDispatch();
   const globalData = useAppSelector((state) => state.common.globalData);
-  const router = useRouter();
 
   return (
     <div className="fixed top-0 left-0 w-full h-[70px] z-10 bg-white rounded-header shadow-general">

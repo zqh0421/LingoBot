@@ -18,7 +18,9 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className="min-h-screen w-full bg-background">
-      <body className={`${lato.className} min-h-full w-full bg-background overflow-y-auto`}>
+      <body
+        className={`${lato.className} min-h-full w-full bg-background text-black overflow-y-auto`}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

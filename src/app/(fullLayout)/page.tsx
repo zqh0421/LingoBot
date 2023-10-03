@@ -5,12 +5,31 @@ import Image from "next/image";
 
 import ChatBubble from "@/components/ui/chatbubble";
 import Wrapper from "@/components/ui/wrapper";
-import Button from "@/components/ui/button";
+import ButtonLink from "@/components/ui/buttonlink";
+
+const homeButtonLinks = [
+  {
+    title: "a context-based dictionary.",
+    href: "/dict",
+  },
+  {
+    title: "a select mode to improve my vocab.",
+    href: "/",
+  },
+  {
+    title: "chat-based language study games.",
+    href: "/",
+  },
+  {
+    title: "an overview of my study history.",
+    href: "/",
+  },
+];
 
 function Home() {
   return (
     <main className="relative flex flex-col items-center pt-24">
-      <Wrapper className="gap-6 flex flex-col">
+      <Wrapper className="gap-6 flex flex-col justify-center items-center">
         <div className="flex w-full items-center justify-center">
           <Image
             className="relative"
@@ -24,12 +43,22 @@ function Home() {
         </div>
         <ChatBubble option="end" fontWeight="bold">
           <p className="mt-[12.5px]">Hi, I&apos;m looking for ...</p>
-          <ul className="flex flex-col gap-[10px] p-[10px] mt-[10px]">
-            <Button>a context-based dictionary.</Button>
-            <Button>a select mode to improve my vocab.</Button>
-            <Button>chat-based language study games.</Button>
-            <Button>an overview of my study history.</Button>
-          </ul>
+          <div className="flex flex-col gap-[10px] p-[10px] mt-[10px]">
+            {homeButtonLinks.map((link) => (
+              <ButtonLink
+                key={link.title}
+                onClick={(e: React.MouseEvent) => {
+                  if (true) {
+                    window.location.href = "/login";
+                  } else {
+                    window.location.href = link.href;
+                  }
+                }}
+              >
+                {link.title}
+              </ButtonLink>
+            ))}
+          </div>
         </ChatBubble>
       </Wrapper>
     </main>
