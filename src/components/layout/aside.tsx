@@ -1,5 +1,3 @@
-"use client";
-
 const Aside = () => {
   return <div>Aside</div>;
 };

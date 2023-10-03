@@ -2,15 +2,13 @@
 
 import React from "react";
 import Image from "next/image";
-import {useTheme} from "next-themes";
 
 import {useAppSelector, useAppDispatch} from "@/store/hooks";
 import {setGlobalData} from "@/store/modules/common";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "@/components/ui/wrapper";
+import {ThemeToggle} from "@/components/themetoggle";
 
 const Header = () => {
-  const {systemTheme, theme, setTheme} = useTheme();
-  const [currentTheme, setCurrentTheme] = React.useState(theme === "system" ? systemTheme : theme); // default to dark
   const dispatch = useAppDispatch();
   const globalData = useAppSelector((state) => state.common.globalData);
 
@@ -21,6 +19,7 @@ const Header = () => {
           LingoBuddy
         </a>
         <div className="flex gap-6 text-black">
+          <ThemeToggle />
           <button>Sign Up</button>
           <button>Log In</button>
         </div>
@@ -30,44 +29,6 @@ const Header = () => {
   return (
     <div className="z-10 w-full items-center justify-between font-mono text-sm bg-white lg:flex">
       <Wrapper>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-        {currentTheme === "dark" ? (
-          <div
-            className="cursor-pointer text-yellow-400"
-            onClick={() => {
-              setTheme("light");
-              setCurrentTheme("light");
-            }}
-          >
-            set light
-          </div>
-        ) : (
-          <div
-            className="cursor-pointer text-slate-700"
-            onClick={() => {
-              setTheme("dark");
-              setCurrentTheme("dark");
-            }}
-          >
-            set dark
-          </div>
-        )}
         {/* 
   <div
     onClick={() => {
