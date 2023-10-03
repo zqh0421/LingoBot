@@ -3,34 +3,38 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 44, 44, 44;
+  /* --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255; */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 44, 44, 44;
+    /* --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0; */
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
+  /* background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) */
+  /* rgb(var(--background-start-rgb)); */
 }
 
 @layer base {
   .light {
-    --global-bg: theme("colors.white");
-    --global-bg-invert: #111827;
-    --badges-purple-border: rgba(126, 34, 206, 0.1);
+    --white: #fdfdfd;
+    --black: #2c2c2c;
+    --background: #f4f4f7;
+    --green: #44c0be;
+    --shadow: 0px 4px 8px 0px rgba(44, 44, 44, 0.1);
   }
   .dark {
-    --global-bg: #111827;
-    --global-bg-invert: theme("colors.white");
-    --badges-purple-border: rgba(192, 132, 250, 0.3);
+    --white: #fdfdfd;
+    --black: #2c2c2c;
+    --background: #f4f4f7;
+    --green: #44c0be;
+    --shadow: 0px 4px 8px 0px rgba(44, 44, 44, 0.1);
   }
 }
