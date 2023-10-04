@@ -1,7 +1,7 @@
-import {ReactNode, MouseEvent} from "react";
-import {Lato} from "next/font/google";
+import { ReactNode, MouseEvent } from "react";
+import { Lato } from "next/font/google";
 
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const latoBold = Lato({
   subsets: ["latin"],

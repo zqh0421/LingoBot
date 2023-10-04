@@ -1,11 +1,11 @@
 "use client";
 
-import {useRouter} from "next-nprogress-bar";
+import { useRouter } from "next-nprogress-bar";
 
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 
-export default function AsideLayout({children}: {children: React.ReactNode}) {
+export default function AsideLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   return (

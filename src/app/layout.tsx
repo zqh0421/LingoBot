@@ -1,5 +1,5 @@
-import type {Metadata} from "next";
-import {Lato} from "next/font/google";
+import type { Metadata } from "next";
+import { Lato } from "next/font/google";
 import React from "react";
 
 import "./globals.css";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: "Your lingo buddy.",
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="min-h-screen w-full bg-background">
       <body

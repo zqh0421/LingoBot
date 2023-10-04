@@ -1,6 +1,14 @@
-import {IGlobalData} from "@/types/store/common";
+import { IGlobalData } from "@/types/store/common";
 export const defaultGlobalData: IGlobalData = {
-  userName: "",
-  token: "",
-  role: "user",
+  userCredential: {
+    user: {
+      uid: "",
+      email: "",
+      displayName: "",
+      photoURL: "",
+      refreshToken: "",
+    },
+    providerId: "",
+    operationType: "",
+  },
 };

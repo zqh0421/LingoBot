@@ -1,18 +1,30 @@
 "use client";
 
-import React, {MouseEvent} from "react";
-import {GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword} from "firebase/auth";
+import React, { MouseEvent } from "react";
+import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import ChatBubble from "@/components/ui/chatbubble";
 import Wrapper from "@/components/ui/wrapper";
 import ButtonLink from "@/components/ui/buttonlink";
-import {auth} from "@/lib/firebase";
+import { auth } from "@/lib/firebase";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { setGlobalData } from "@/store/modules/common";
+import { serializeUserCredential } from "@/lib/utils";
+import { SignInWithGoogle } from "@/components/signinmethod";
 
 function SignUp() {
   const [email, setEmail] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwdConfirm, setPwdConfirm] = React.useState("");
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const globalData = useAppSelector((state) => state.common.globalData);
+
+  if (globalData.userCredential.user.uid) {
+    router.push("/");
+  }
 
   const signup = (e: MouseEvent) => {
     console.log(email, pwd);
@@ -22,12 +34,6 @@ function SignUp() {
     } else {
       console.error("incorrect pwd");
     }
-  };
-
-  const signUpWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    console.log(process.env.LINGO_BUDDY_FIREBASE_API_KEY);
-    return signInWithPopup(auth, provider);
   };
 
   return (
@@ -88,12 +94,7 @@ function SignUp() {
         <ButtonLink onClick={(e: MouseEvent) => signup(e)} className="w-4/5 max-w-[340px] mt-6">
           SIGN UP
         </ButtonLink>
-        <ButtonLink
-          onClick={() => signUpWithGoogle()}
-          className="w-4/5 max-w-[340px] bg-white text-black"
-        >
-          SIGN UP with GOOGLE
-        </ButtonLink>
+        <SignInWithGoogle />
       </Wrapper>
     </main>
   );

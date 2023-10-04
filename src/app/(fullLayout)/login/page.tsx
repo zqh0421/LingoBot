@@ -1,19 +1,34 @@
 "use client";
 
-import React, {MouseEvent} from "react";
+import React, { MouseEvent } from "react";
 import Image from "next/image";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 import ChatBubble from "@/components/ui/chatbubble";
 import Wrapper from "@/components/ui/wrapper";
 import ButtonLink from "@/components/ui/buttonlink";
+import { auth } from "@/lib/firebase";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { setGlobalData } from "@/store/modules/common";
+import { serializeUserCredential } from "@/lib/utils";
+import { SignInWithGoogle } from "@/components/signinmethod";
 
 function Login() {
   const [email, setEmail] = React.useState("");
   const [pwd, setPwd] = React.useState("");
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const globalData = useAppSelector((state) => state.common.globalData);
+
+  if (globalData.userCredential.user.uid) {
+    router.push("/");
+  }
 
   const login = (e: MouseEvent) => {
     console.log(email, pwd);
   };
+
   return (
     <main className="relative flex flex-col items-center pt-24">
       <Wrapper className="gap-6 flex flex-col justify-center items-center">
@@ -59,12 +74,7 @@ function Login() {
         <ButtonLink onClick={(e: MouseEvent) => login(e)} className="w-4/5 max-w-[340px] mt-6">
           LOG IN
         </ButtonLink>
-        <ButtonLink
-          onClick={(e: MouseEvent) => login(e)}
-          className="w-4/5 max-w-[340px] bg-white text-black"
-        >
-          LOG IN with GOOGLE
-        </ButtonLink>
+        <SignInWithGoogle />
       </Wrapper>
     </main>
   );

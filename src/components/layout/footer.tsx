@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import { useState } from "react";
 import Wrapper from "@/components/ui/wrapper";
 
 function Footer() {
@@ -26,8 +26,8 @@ function Footer() {
     <footer className="w-full">
       <Wrapper>
         <div className="flex flex-col items-center justify-center py-12">
-          <small className="text-xs/5 text-neutral-600">Made with Next.js by QIANHUI ZHAO</small>
-          <small className="text-xs/5 text-neutral-600">
+          <small className="text-xs/5 text-neutral-500">Made with Next.js by QIANHUI ZHAO</small>
+          <small className="text-xs/5 text-neutral-500">
             Last Updated: {months[currentMonth]} {currentDay}, {currentYear}
           </small>
         </div>

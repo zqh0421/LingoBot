@@ -1,6 +1,8 @@
-import {clsx, type ClassValue} from "clsx";
-import {customAlphabet} from "nanoid";
-import {twMerge} from "tailwind-merge";
+import { SerializedUserCredential } from "@/types/store/common";
+import { clsx, type ClassValue } from "clsx";
+import { UserCredential } from "firebase/auth";
+import { customAlphabet } from "nanoid";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -38,3 +40,20 @@ export function formatDate(input: string | number | Date): string {
     year: "numeric",
   });
 }
+
+export const serializeUserCredential = (userCredential: UserCredential) => {
+  const temp: SerializedUserCredential = {
+    user: {
+      uid: userCredential.user.uid,
+      email: userCredential.user.email,
+      displayName: userCredential.user.displayName,
+      photoURL: userCredential.user.photoURL,
+      refreshToken: userCredential.user.refreshToken,
+      // ... any other user properties you want to use
+    },
+    providerId: userCredential.providerId,
+    operationType: userCredential.operationType,
+    // if you need anything from _tokenResponse, extract it here
+  };
+  return temp;
+};

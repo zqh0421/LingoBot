@@ -1,8 +1,8 @@
-import {ReactNode} from "react";
-import {Lato} from "next/font/google";
+import { ReactNode } from "react";
+import { Lato } from "next/font/google";
 import Image from "next/image";
 
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const lato = Lato({
   subsets: ["latin"],
