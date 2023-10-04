@@ -1,6 +1,6 @@
 "use client";
 
-import { GoogleAuthProvider, signInWithPopup, reauthenticateWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 import { auth } from "@/lib/firebase";
@@ -22,7 +22,8 @@ export const SignInWithGoogle = () => {
           userCredential: serializeUserCredential(res),
         }),
       );
-      if (globalData && globalData.userCredential) router.push("/"); // 登录成功跳转
+      console.log(globalData);
+      if (globalData && globalData.userCredential.user.uid) router.push("/"); // 登录成功跳转
     });
   };
   return (
