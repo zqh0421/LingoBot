@@ -9,7 +9,7 @@ import { useAppSelector, useAppDispatch } from "@/store/hooks";
 const navButtonLinks = [
   {
     title: "a context-based dictionary.",
-    href: "/dict",
+    href: "/chat",
   },
   {
     title: "a select mode to improve my vocab.",
