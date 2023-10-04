@@ -9,7 +9,7 @@ import Wrapper from "@/components/ui/wrapper";
 import ChatBubbleWithIcon from "@/components/ui/chatwithicon";
 import { getAnswer } from "@/lib/chat";
 import ButtonLink from "@/components/ui/buttonlink";
-import { systemTemplate, aiTemplate } from "./template";
+import { systemTemplate, aiTemplate } from "@/lib/template";
 
 export interface IMessage {
   role: "AI" | "HUMAN" | "SYSTEM" | "AI_ANSWER";
