@@ -37,6 +37,7 @@ const config: Config = {
       },
       boxShadow: {
         general: `var(${"--shadow"})`,
+        generalReverse: `var(${"--shadow-reverse"})`,
       },
       clipPath: {
         bubbleLeft: "0px 4px 8px 0px rgba(44, 44, 44, 0.10)",

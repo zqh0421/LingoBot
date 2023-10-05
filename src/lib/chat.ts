@@ -3,6 +3,8 @@ import { ChatPromptTemplate } from "langchain/prompts";
 import { AIMessage, HumanMessage, SystemMessage } from "langchain/schema";
 import dotenv from "dotenv";
 
+import { IMessage } from "@/components/inputpanel";
+
 dotenv.config();
 
 // 创建ChatOpenAI模型实例
@@ -30,7 +32,7 @@ function formatChat(chat: Array<{ role: string; content: string }>) {
 }
 
 // 使用LangChain来调用ChatOpenAI模型并获得回答
-export async function getAnswer(chat: Array<{ role: string; content: string }>) {
+export async function getAnswer(chat: IMessage[]) {
   // 消息列表
   const messages = formatChat(chat);
 

@@ -4,23 +4,20 @@ import React, { MouseEvent } from "react";
 import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
 import { firestore } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
+import { Renderable, Toast, ValueFunction, toast } from "react-hot-toast";
+
+import { InputPanel } from "@/components/inputpanel";
+import { useChat } from "@/hooks/useChat";
 
 import Wrapper from "@/components/ui/wrapper";
 import ChatBubbleWithIcon from "@/components/ui/chatwithicon";
-import { getAnswer } from "@/lib/chat";
 import ButtonLink from "@/components/ui/buttonlink";
-import { systemTemplate, aiTemplate } from "@/lib/template";
-
-export interface IMessage {
-  role: "AI" | "HUMAN" | "SYSTEM" | "AI_ANSWER";
-  content: string;
-  word?: string;
-  context?: string;
-}
+import { aiTemplate } from "@/lib/template";
+import { IMessage } from "@/components/inputpanel";
 
 function Chat() {
   const router = useRouter();
-  const [chat, setChat] = React.useState<Array<IMessage>>([
+  const initialMessages: IMessage[] = [
     {
       role: "AI",
       content: aiTemplate,
@@ -29,24 +26,15 @@ function Chat() {
       role: "HUMAN",
       content: "I want to know more about Travvy Patty, why is it a nickname for Travis Scott?",
     },
-  ]);
-  const getMessage = async () => {
-    const answer = await getAnswer([
-      {
-        role: "SYSTEM",
-        content: systemTemplate,
-      },
-      ...chat,
-    ]);
-    answer &&
-      setChat([
-        ...chat,
-        {
-          role: "AI_ANSWER",
-          content: answer,
-        },
-      ]);
-  };
+  ];
+  const { messages, append, reload, stop, isLoading, input, setInput } = useChat({
+    initialMessages,
+    onResponse(response: Response) {
+      if (response.status === 401) {
+        toast.error(response.statusText);
+      }
+    },
+  });
 
   const goSearch = (e: MouseEvent, word: string, context: string) => {
     if (context) router.push("/dict/" + word + "/" + context);
@@ -54,9 +42,9 @@ function Chat() {
   };
 
   return (
-    <main className="relative flex flex-col items-center pt-24">
+    <main className="relative flex flex-col items-center pt-24 pb-[200px]">
       <Wrapper>
-        {chat.map((message, index) => {
+        {messages.map((message, index) => {
           if (message.role === "AI_ANSWER") {
             const json = JSON.parse(message.content);
             return (
@@ -98,8 +86,16 @@ function Chat() {
             );
           }
         })}
-        <button onClick={() => getMessage()}>test</button>
       </Wrapper>
+      <InputPanel
+        isLoading={isLoading}
+        stop={stop}
+        append={append}
+        reload={reload}
+        messages={messages}
+        input={input}
+        setInput={setInput}
+      />
     </main>
   );
 }

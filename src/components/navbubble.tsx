@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import ButtonLink from "@/components/ui/buttonlink";
 import ChatBubble from "@/components/ui/chatbubble";
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
 const navButtonLinks = [
   {

@@ -9,7 +9,7 @@ import ChatBubble from "@/components/ui/chatbubble";
 import Wrapper from "@/components/ui/wrapper";
 import ButtonLink from "@/components/ui/buttonlink";
 import { auth } from "@/lib/firebase";
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { setGlobalData } from "@/store/modules/common";
 import { serializeUserCredential } from "@/lib/utils";
 import { SignInWithGoogle } from "@/components/signinmethod";

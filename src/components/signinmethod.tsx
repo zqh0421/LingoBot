@@ -4,7 +4,7 @@ import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 import { auth } from "@/lib/firebase";
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { setGlobalData } from "@/store/modules/common";
 import { serializeUserCredential } from "@/lib/utils";
 import ButtonLink from "@/components/ui/buttonlink";

@@ -8,7 +8,7 @@ import { auth } from "@/lib/firebase";
 import { useDispatch } from "react-redux";
 
 import { resetAll } from "@/store/modules/common";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/lib/hooks";
 import ButtonLink from "@/components/ui/buttonlink";
 import { Button } from "@/components/ui/button";
 import {

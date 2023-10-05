@@ -7,13 +7,14 @@ import { store, persistor } from "@/store/store"; // Import your Redux store and
 import { ThemeProvider } from "next-themes";
 // progress
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider enableSystem={true} attribute="class">
-          {children}
+          <TooltipProvider>{children}</TooltipProvider>
           <ProgressBar height="2px" color="#4F46E5" options={{ showSpinner: false }} />
         </ThemeProvider>
       </PersistGate>
