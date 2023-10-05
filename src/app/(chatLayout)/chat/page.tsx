@@ -22,10 +22,10 @@ function Chat() {
       role: "AI",
       content: aiTemplate,
     },
-    {
-      role: "HUMAN",
-      content: "I want to know more about Travvy Patty, why is it a nickname for Travis Scott?",
-    },
+    // {
+    //   role: "HUMAN",
+    //   content: "I want to know more about Travvy Patty, why is it a nickname for Travis Scott?",
+    // },
   ];
   const { messages, append, reload, stop, isLoading, input, setInput } = useChat({
     initialMessages,
