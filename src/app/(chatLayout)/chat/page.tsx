@@ -1,8 +1,6 @@
 "use client";
 
 import React, { MouseEvent } from "react";
-import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
-import { firestore } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { Renderable, Toast, ValueFunction, toast } from "react-hot-toast";
 
@@ -14,6 +12,8 @@ import ChatBubbleWithIcon from "@/components/ui/chatwithicon";
 import ButtonLink from "@/components/ui/buttonlink";
 import { aiTemplate } from "@/lib/template";
 import { IMessage } from "@/components/inputpanel";
+import Card from "@/components/ui/card";
+import { addQuery } from "@/app/api/search";
 
 function Chat() {
   const router = useRouter();
@@ -55,14 +55,10 @@ function Chat() {
                   </ChatBubbleWithIcon>
                 )}
                 {json.word && (
-                  <ChatBubbleWithIcon key={index} option={"start"} className="mt-6">
-                    {json.word}
-                  </ChatBubbleWithIcon>
+                  <Card key={index} title="Word" desc={json.word} className="mt-6 mx-auto" />
                 )}
                 {json.context && (
-                  <ChatBubbleWithIcon key={index} option={"start"} className="mt-6">
-                    {json.context}
-                  </ChatBubbleWithIcon>
+                  <Card key={index} title="Context" desc={json.context} className="mt-6 mx-auto" />
                 )}
                 {json.word && (
                   <ButtonLink

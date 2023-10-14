@@ -43,7 +43,11 @@ export const InputPanel: React.FC<InputPanelProps> = ({
             </Button>
           ) : (
             messages?.length > 0 && (
-              <Button variant="outline" onClick={() => reload()} className="bg-white">
+              <Button
+                variant="outline"
+                onClick={() => reload()}
+                className="bg-white hover:text-white"
+              >
                 <IconRefresh className="mr-2" />
                 Regenerate response
               </Button>

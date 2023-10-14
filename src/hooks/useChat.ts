@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
+import {
+  addDoc,
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+} from "firebase/firestore";
 
 import { IMessage } from "@/components/inputpanel";
 import { getAnswer } from "@/lib/chat";
 import { systemTemplate } from "@/lib/template";
+import { useAppSelector } from "@/lib/hooks";
+import { firestore } from "@/lib/firebase";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
   initialMessages: IMessage[];
@@ -13,28 +24,52 @@ export function useChat({ initialMessages, onResponse }: ChatProps) {
   const [messages, setMessages] = useState(initialMessages || []);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const globalData = useAppSelector((state) => state.common.globalData);
+
+  async function addData(context: string, word: string) {
+    const docData = {
+      context,
+      word,
+      createdAt: Date.now(),
+      deleted: false,
+      updatedAt: Date.now(),
+      userId: globalData.userCredential.user.uid,
+    };
+    const docRef = await addDoc(collection(firestore, "query"), docData);
+    console.log("Document written with ID: ", docRef.id);
+  }
 
   const append = async (message: IMessage) => {
     setIsLoading(true);
     setMessages((prevMessages) => [...prevMessages, message]);
-    // 这里你可能还想添加其他逻辑，比如发送消息到服务器等
-    const answer = await getAnswer([
-      {
-        role: "SYSTEM",
-        content: systemTemplate,
-      },
-      ...messages,
-    ]);
-    answer &&
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          role: "AI_ANSWER",
-          content: answer,
-        },
-      ]);
-    setIsLoading(false);
+    // 这里你可能还想添加其他逻辑，比如发送消息到服务器等 -> useEffect
   };
+
+  useEffect(() => {
+    if (messages[messages.length - 1].role === "HUMAN") {
+      getAnswer([
+        {
+          role: "SYSTEM",
+          content: systemTemplate,
+        },
+        ...messages,
+      ])
+        .then((answer) => {
+          answer &&
+            setMessages((prevMessages) => [
+              ...prevMessages,
+              {
+                role: "AI_ANSWER",
+                content: answer,
+              },
+            ]);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
+  }, [messages]);
 
   const reload = () => {
     // 为 "reload" 提供逻辑，例如重新加载聊天
